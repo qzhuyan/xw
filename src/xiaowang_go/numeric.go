@@ -8,11 +8,10 @@ import (
 
 type numeric int64
 
-func (n numeric) Transform(seed int64) numeric {
-	gen := rand.New(rand.NewSource(seed))
+func (n numeric) Transform(r *rand.Rand) numeric {
 	max := int64(math.Pow(10, float64(n.Len())))
 	min := int64(math.Pow(10, float64(n.Len()-1)))
-	return numeric(min + RandInRange(gen, min, max))
+	return numeric(min + RandInRange(r, min, max))
 }
 
 func (n numeric) Len() int {

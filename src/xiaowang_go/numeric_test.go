@@ -14,7 +14,7 @@ func TestLen(t *testing.T) {
 }
 
 func TestTransform(t *testing.T) {
-	Res := Number.Transform(1)
+	Res := Number.Transform(NewRandSeed(1))
 	if 6 != Res.Len() {
 		t.Error("length is wrong, should be the same", Res)
 	}
