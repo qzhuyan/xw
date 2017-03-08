@@ -1,0 +1,11 @@
+version: 1
+hashead: yes
+fields:
+  - name: orderid
+    class: numeric
+    pos: 1
+    conf: ""
+  - name: item
+    pos: 2
+    conf: ""
+    class: text
