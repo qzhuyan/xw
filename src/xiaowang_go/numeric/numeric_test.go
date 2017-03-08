@@ -1,10 +1,13 @@
-package xiaowang_go
+package numeric_test
 
 import (
 	"testing"
+	"xiaowang_go/conf"
+	"xiaowang_go/numeric"
+	"xiaowang_go/xwrand"
 )
 
-var Number numeric = 123456
+var Number numeric.Numeric = 123456
 var NumericLen = 6
 
 func TestLen(t *testing.T) {
@@ -14,7 +17,7 @@ func TestLen(t *testing.T) {
 }
 
 func TestTransform(t *testing.T) {
-	Res := Number.Transform(NewRandSeed(1), new(f_spec))
+	Res := Number.Transform(xwrand.NewRandSeed(1), new(conf.F_spec))
 	if 6 != len(Res) {
 		t.Error("length is wrong, should be the same", Res)
 	}

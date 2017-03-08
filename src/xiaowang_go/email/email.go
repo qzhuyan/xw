@@ -1,16 +1,18 @@
-package xiaowang_go
+package email
 
 import (
 	"math/rand"
 	"strings"
+	"xiaowang_go/conf"
+	"xiaowang_go/text"
 )
 
 type email string
 
-func (e email) Transform(r *rand.Rand, conf *f_spec) string {
+func (e email) Transform(r *rand.Rand, conf *conf.F_spec) string {
 	earray := strings.Split(string(e), "@")
 	user := earray[0]
 	mailserver := earray[1]
-	newuser := text(user).Transform(r, conf)
+	newuser := text.Text(user).Transform(r, conf)
 	return newuser + "@" + mailserver
 }

@@ -1,4 +1,4 @@
-package xiaowang_go
+package xwrand
 
 import (
 	"math/rand"

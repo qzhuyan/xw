@@ -1,4 +1,4 @@
-package xiaowang_go
+package conf
 
 import (
 	"gopkg.in/yaml.v2"
@@ -6,24 +6,24 @@ import (
 	"io/ioutil"
 )
 
-type f_spec struct {
+type F_spec struct {
 	Name, Class, Conf, Rangefrom, Rangeto string
 	Pos                                   int
 }
 
-type csv_conf struct {
+type CSV_conf struct {
 	Version int
-	Fields  []f_spec
+	Fields  []F_spec
 	Hashead bool
 	Seed    int64
 }
 
-func parse_csv_conf(filepath string) csv_conf {
+func ParseConf(filepath string) CSV_conf {
 	data, err := ioutil.ReadFile(filepath)
 	if err != nil {
 		panic(err)
 	}
-	var c csv_conf
+	var c CSV_conf
 	err = yaml.Unmarshal(data, &c)
 	if nil != err {
 		panic(err)
@@ -31,7 +31,7 @@ func parse_csv_conf(filepath string) csv_conf {
 	return c
 }
 
-func gen_csv_conf(c csv_conf) string {
+func gen_csv_conf(c CSV_conf) string {
 	return "todo"
 }
 

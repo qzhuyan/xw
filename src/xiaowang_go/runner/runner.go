@@ -1,4 +1,4 @@
-package xiaowang_go
+package runner
 
 import (
 	//"bufio"
@@ -7,11 +7,15 @@ import (
 	"log"
 	"math/rand"
 	"os"
+	"xiaowang_go/conf"
+	"xiaowang_go/numeric"
+	"xiaowang_go/text"
+	"xiaowang_go/xwrand"
 )
 
-func run(conffile, srcfile, destfile string) {
+func Run(conffile, srcfile, destfile string) {
 	//read config
-	conf := parse_csv_conf(conffile)
+	c := conf.ParseConf(conffile)
 	//iter input file
 	src, err := os.Open(srcfile)
 	if nil != err {
@@ -26,8 +30,8 @@ func run(conffile, srcfile, destfile string) {
 	r := csv.NewReader(src)
 	w := csv.NewWriter(dest)
 
-	seed := NewRandSeed(conf.Seed)
-	if conf.Hashead {
+	seed := xwrand.NewRandSeed(c.Seed)
+	if c.Hashead {
 		r.Read()
 	}
 
@@ -39,7 +43,7 @@ func run(conffile, srcfile, destfile string) {
 		if err != nil {
 			log.Fatal(err)
 		}
-		for _, fspec := range conf.Fields {
+		for _, fspec := range c.Fields {
 			// todo: if Pos not defined use header or ?
 			record[fspec.Pos] = anonymize(record[fspec.Pos], seed, &fspec)
 			w.Write(record)
@@ -47,15 +51,15 @@ func run(conffile, srcfile, destfile string) {
 	}
 }
 
-func anonymize(s string, r *rand.Rand, spec *f_spec) string {
+func anonymize(s string, r *rand.Rand, spec *conf.F_spec) string {
 	if s == "" {
 		return ""
 	}
 	switch spec.Class {
 	case "numeric":
-		return NewNumeric(s).Transform(r, spec)
+		return numeric.NewNumeric(s).Transform(r, spec)
 	case "text":
-		return text(s).Transform(r, spec)
+		return text.Text(s).Transform(r, spec)
 	default:
 		panic("unknow class")
 	}

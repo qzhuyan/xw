@@ -1,14 +1,15 @@
-package xiaowang_go
+package text
 
 import (
 	"math/rand"
 	"strings"
+	"xiaowang_go/conf"
 )
 
-type text string //text can have any chars including blankspace
+type Text string //text can have any chars including blankspace
 type word string // word has no blank space
 
-func (s text) Transform(r *rand.Rand, _conf *f_spec) string {
+func (s Text) Transform(r *rand.Rand, _conf *conf.F_spec) string {
 	ws := strings.Split(string(s), " ")
 	for i := 0; i < len(ws); i++ {
 		ws[i] = word(ws[i]).Transform(r)
