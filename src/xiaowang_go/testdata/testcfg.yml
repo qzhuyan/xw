@@ -5,6 +5,7 @@ fields:
     class: numeric
     pos: 1
     conf: ""
+    rangefrom: "123456"
   - name: item
     pos: 2
     conf: ""

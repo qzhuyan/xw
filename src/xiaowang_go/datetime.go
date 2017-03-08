@@ -7,8 +7,8 @@ import "math/rand"
 type datetime string
 
 func (d datetime) Transform(r *rand.Rand, conf *Transconf) string {
-	from := datetime(conf.rangeFrom)
-	to := datetime(conf.rangeTo)
+	from := datetime(conf.Rangefrom)
+	to := datetime(conf.Rangeto)
 	d.rangeok(from, to)
 	unixfrom := from.Parse().Unix()
 	unixto := to.Parse().Unix()

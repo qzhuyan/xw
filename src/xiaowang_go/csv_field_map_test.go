@@ -11,10 +11,11 @@ func TestParseCSVConf(t *testing.T) {
 	fs := make([]f_spec, 2)
 
 	fs[0] = f_spec{
-		Name:  "orderid",
-		Class: "numeric",
-		Conf:  "",
-		Pos:   1,
+		Name:      "orderid",
+		Class:     "numeric",
+		Conf:      "",
+		Pos:       1,
+		Rangefrom: "123456",
 	}
 	fs[1] = f_spec{
 		Name:  "item",
@@ -37,5 +38,8 @@ func TestParseCSVConf(t *testing.T) {
 
 	if conf.Fields[1] != fs[1] {
 		t.Error("Field_spec compared failed, ", conf.Fields)
+	}
+	if conf.Fields[0].Rangefrom != "123456" {
+		t.Error("Rangefrom not set")
 	}
 }

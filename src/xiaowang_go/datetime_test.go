@@ -9,7 +9,7 @@ const test_dt datetime = "20160101 08:07:33"
 const start_dt datetime = "20160101 00:07:33"
 const end_dt datetime = "20160102 08:07:33"
 
-var testConf Transconf = Transconf{rangeFrom: string(start_dt), rangeTo: string(end_dt)}
+var testConf Transconf = Transconf{Rangefrom: string(start_dt), Rangeto: string(end_dt)}
 
 func TestDatetimeTransform(t *testing.T) {
 	t1 := test_dt.Transform(NewRandSeed(1), &testConf)

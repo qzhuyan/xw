@@ -7,9 +7,8 @@ import (
 )
 
 type f_spec struct {
-	Transconf
-	Name, Class, Conf string
-	Pos               int
+	Name, Class, Conf, Rangefrom, Rangeto string
+	Pos                                   int
 }
 
 type csv_conf struct {
