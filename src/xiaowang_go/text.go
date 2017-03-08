@@ -8,15 +8,15 @@ import (
 type text string //text can have any chars including blankspace
 type word string // word has no blank space
 
-func (s text) Transform(seed int64, _conf *Transconf) string {
+func (s text) Transform(r *rand.Rand, _conf *f_spec) string {
 	ws := strings.Split(string(s), " ")
 	for i := 0; i < len(ws); i++ {
-		ws[i] = word(ws[i]).Transform(seed)
+		ws[i] = word(ws[i]).Transform(r)
 	}
 	return strings.Join(ws, " ")
 }
 
-func (w word) Transform(seed int64) string {
+func (w word) Transform(r *rand.Rand) string {
 	return RandStringBytes(len(w))
 }
 

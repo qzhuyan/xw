@@ -15,6 +15,7 @@ type csv_conf struct {
 	Version int
 	Fields  []f_spec
 	Hashead bool
+	Seed    int64
 }
 
 func parse_csv_conf(filepath string) csv_conf {

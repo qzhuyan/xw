@@ -6,7 +6,7 @@ import "strings"
 const test_string text = "abc efg"
 
 func TestTextTransform(t *testing.T) {
-	res := test_string.Transform(1, new(Transconf))
+	res := test_string.Transform(NewRandSeed(1), new(f_spec))
 	words := strings.Split(res, " ")
 	if len(words[0]) != 3 {
 		t.Error("len should not be changed")

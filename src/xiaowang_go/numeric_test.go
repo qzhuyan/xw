@@ -14,12 +14,8 @@ func TestLen(t *testing.T) {
 }
 
 func TestTransform(t *testing.T) {
-	Res := Number.Transform(NewRandSeed(1), new(Transconf))
-	if 6 != Res.Len() {
+	Res := Number.Transform(NewRandSeed(1), new(f_spec))
+	if 6 != len(Res) {
 		t.Error("length is wrong, should be the same", Res)
-	}
-
-	if Res == Number {
-		t.Error("same number, not transformed?")
 	}
 }
