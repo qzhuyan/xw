@@ -8,7 +8,7 @@ import (
 
 type numeric int64
 
-func (n numeric) Transform(r *rand.Rand) numeric {
+func (n numeric) Transform(r *rand.Rand, _conf *Transconf) numeric {
 	max := int64(math.Pow(10, float64(n.Len())))
 	min := int64(math.Pow(10, float64(n.Len()-1)))
 	return numeric(min + RandInRange(r, min, max))

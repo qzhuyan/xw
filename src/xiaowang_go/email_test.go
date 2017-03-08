@@ -8,7 +8,7 @@ import (
 const test_email email = "123@abc.com"
 
 func TestEmailTransform(t *testing.T) {
-	res := test_email.Transform(1)
+	res := test_email.Transform(1, new(Transconf))
 	words := strings.Split(res, "@")
 	if words[0] == "123" {
 		t.Error("user name is should not be  123")

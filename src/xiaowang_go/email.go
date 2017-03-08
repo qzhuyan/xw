@@ -6,10 +6,10 @@ import (
 
 type email string
 
-func (e email) Transform(seed int64) string {
+func (e email) Transform(seed int64, conf *Transconf) string {
 	earray := strings.Split(string(e), "@")
 	user := earray[0]
 	mailserver := earray[1]
-	newuser := text(user).Transform(seed)
+	newuser := text(user).Transform(seed, conf)
 	return newuser + "@" + mailserver
 }

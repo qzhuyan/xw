@@ -8,7 +8,7 @@ import (
 type text string //text can have any chars including blankspace
 type word string // word has no blank space
 
-func (s text) Transform(seed int64) string {
+func (s text) Transform(seed int64, _conf *Transconf) string {
 	ws := strings.Split(string(s), " ")
 	for i := 0; i < len(ws); i++ {
 		ws[i] = word(ws[i]).Transform(seed)
