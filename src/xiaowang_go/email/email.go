@@ -7,9 +7,9 @@ import (
 	"xiaowang_go/text"
 )
 
-type email string
+type Email string
 
-func (e email) Transform(r *rand.Rand, conf *conf.F_spec) string {
+func (e Email) Transform(r *rand.Rand, conf *conf.F_spec) string {
 	earray := strings.Split(string(e), "@")
 	user := earray[0]
 	mailserver := earray[1]

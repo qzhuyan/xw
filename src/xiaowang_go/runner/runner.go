@@ -8,6 +8,8 @@ import (
 	"math/rand"
 	"os"
 	"xiaowang_go/conf"
+	"xiaowang_go/datetime"
+	"xiaowang_go/email"
 	"xiaowang_go/numeric"
 	"xiaowang_go/text"
 	"xiaowang_go/xwrand"
@@ -73,6 +75,11 @@ func anonymize(s string, r *rand.Rand, spec *conf.F_spec) string {
 		return numeric.NewNumeric(s).Transform(r, spec)
 	case "text":
 		return text.Text(s).Transform(r, spec)
+	case "datetime":
+		return datetime.Datetime(s).Transform(r, spec)
+	case "email":
+		return email.Email(s).Transform(r, spec)
+
 	default:
 		panic("unknow class")
 	}
