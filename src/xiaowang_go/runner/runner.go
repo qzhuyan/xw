@@ -33,7 +33,12 @@ func Run(conffile, srcfile, destfile string) {
 	seed := xwrand.NewRandSeed(c.Seed)
 
 	if !c.Skipheader {
-		Fields = r.Read()
+		data, err := r.Read()
+		if err != nil {
+			panic("not able to read header")
+		}
+		c.Header = data
+		w.Write(data)
 	}
 
 	for {
@@ -46,12 +51,15 @@ func Run(conffile, srcfile, destfile string) {
 		}
 		// decide csv file head
 
-		for _, fspec := range c.Fields {
-			// todo: if Pos not defined use header or ?
-			record[fspec.Pos] = anonymize(record[fspec.Pos], seed, &fspec)
+		for pos, name := range c.Header {
+			spec := c.Fields[name]
+			record[pos] = anonymize(record[pos], seed, &spec)
 		}
 		w.Write(record)
 	}
+
+	//flush it
+	w.Flush()
 }
 
 func anonymize(s string, r *rand.Rand, spec *conf.F_spec) string {
@@ -59,6 +67,8 @@ func anonymize(s string, r *rand.Rand, spec *conf.F_spec) string {
 		return ""
 	}
 	switch spec.Class {
+	case "":
+		return s
 	case "numeric":
 		return numeric.NewNumeric(s).Transform(r, spec)
 	case "text":
