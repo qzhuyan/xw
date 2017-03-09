@@ -1,13 +1,9 @@
 version: 1
-hashead: yes
+useheader: no
+header: [f1, f2, f3, f4 ,f5]
 seed: 1
 fields:
-  - name: orderid
-    class: numeric
-    pos: 1
-    conf: ""
-    rangefrom: "123456"
-  - name: item
-    pos: 2
-    conf: ""
-    class: text
+  f1:
+    transform: numeric
+  f2:
+    transform: text

@@ -31,8 +31,9 @@ func Run(conffile, srcfile, destfile string) {
 	w := csv.NewWriter(dest)
 
 	seed := xwrand.NewRandSeed(c.Seed)
+
 	if c.Hashead {
-		r.Read()
+		Fields = r.Read()
 	}
 
 	for {
@@ -43,11 +44,13 @@ func Run(conffile, srcfile, destfile string) {
 		if err != nil {
 			log.Fatal(err)
 		}
+		// decide csv file head
+
 		for _, fspec := range c.Fields {
 			// todo: if Pos not defined use header or ?
 			record[fspec.Pos] = anonymize(record[fspec.Pos], seed, &fspec)
-			w.Write(record)
 		}
+		w.Write(record)
 	}
 }
 

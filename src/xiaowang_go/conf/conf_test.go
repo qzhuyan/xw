@@ -1,6 +1,7 @@
 package conf_test
 
 import (
+	"reflect"
 	"testing"
 	"xiaowang_go/conf"
 )
@@ -9,38 +10,34 @@ func TestParseCSVConf(t *testing.T) {
 	c := conf.ParseConf("../testdata/testcfg.yml")
 
 	// internal conf
-	fs := make([](conf.F_spec), 2)
+	fs := make(map[string]conf.F_spec)
 
-	fs[0] = conf.F_spec{
-		Name:      "orderid",
-		Class:     "numeric",
-		Conf:      "",
-		Pos:       1,
-		Rangefrom: "123456",
-	}
-	fs[1] = conf.F_spec{
-		Name:  "item",
-		Class: "text",
+	fs["f1"] = conf.F_spec{
+		Class: "numeric",
 		Conf:  "",
-		Pos:   2,
+	}
+	fs["f2"] = conf.F_spec{
+		Class: "text",
 	}
 
 	if c.Version != 1 {
 		t.Error("version is not 1, ", c.Version)
 	}
 
-	if !c.Hashead {
-		t.Error(" hashead is not true, ", c.Hashead)
+	if c.Useheader {
+		t.Error(" usehader is true, ", c.Useheader)
 	}
 
-	if c.Fields[0] != fs[0] {
+	if c.Fields["f1"] != fs["f1"] {
 		t.Error("Field_spec compared failed, ", c.Fields)
 	}
 
-	if c.Fields[1] != fs[1] {
+	if !reflect.DeepEqual(c.Header, []string{"f1", "f2", "f3", "f4", "f5"}) {
+		t.Error("header not match", c.Header)
+	}
+
+	if c.Fields["f2"] != fs["f2"] {
 		t.Error("Field_spec compared failed, ", c.Fields)
 	}
-	if c.Fields[0].Rangefrom != "123456" {
-		t.Error("Rangefrom not set")
-	}
+
 }

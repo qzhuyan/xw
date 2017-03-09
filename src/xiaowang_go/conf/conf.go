@@ -4,18 +4,20 @@ import (
 	"gopkg.in/yaml.v2"
 	//	"io"
 	"io/ioutil"
+	//"strings"
 )
 
 type F_spec struct {
-	Name, Class, Conf, Rangefrom, Rangeto string
-	Pos                                   int
+	Class                          string `yaml:"transform"`
+	Name, Conf, Rangefrom, Rangeto string
 }
 
 type CSV_conf struct {
-	Version int
-	Fields  []F_spec
-	Hashead bool
-	Seed    int64
+	Version   int
+	Fields    map[string]F_spec
+	Useheader bool
+	Seed      int64
+	Header    []string
 }
 
 func ParseConf(filepath string) CSV_conf {
@@ -28,6 +30,10 @@ func ParseConf(filepath string) CSV_conf {
 	if nil != err {
 		panic(err)
 	}
+	if c.Useheader && len(c.Header) > 0 {
+		panic("in config file both hashead and filenames are defined, which one to use?")
+	}
+
 	return c
 }
 
