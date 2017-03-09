@@ -13,11 +13,11 @@ type F_spec struct {
 }
 
 type CSV_conf struct {
-	Version   int
-	Fields    map[string]F_spec
-	Useheader bool
-	Seed      int64
-	Header    []string
+	Version    int
+	Fields     map[string]F_spec
+	Skipheader bool
+	Seed       int64
+	Header     []string
 }
 
 func ParseConf(filepath string) CSV_conf {
@@ -30,7 +30,7 @@ func ParseConf(filepath string) CSV_conf {
 	if nil != err {
 		panic(err)
 	}
-	if c.Useheader && len(c.Header) > 0 {
+	if c.Skipheader && len(c.Header) > 0 {
 		panic("in config file both hashead and filenames are defined, which one to use?")
 	}
 

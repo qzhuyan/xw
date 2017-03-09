@@ -32,7 +32,7 @@ func Run(conffile, srcfile, destfile string) {
 
 	seed := xwrand.NewRandSeed(c.Seed)
 
-	if c.Hashead {
+	if !c.Skipheader {
 		Fields = r.Read()
 	}
 

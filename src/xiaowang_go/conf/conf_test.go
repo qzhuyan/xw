@@ -24,8 +24,8 @@ func TestParseCSVConf(t *testing.T) {
 		t.Error("version is not 1, ", c.Version)
 	}
 
-	if c.Useheader {
-		t.Error(" usehader is true, ", c.Useheader)
+	if c.Skipheader {
+		t.Error(" usehader is true, ", c.Skipheader)
 	}
 
 	if c.Fields["f1"] != fs["f1"] {
