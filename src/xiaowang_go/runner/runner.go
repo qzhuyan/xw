@@ -90,7 +90,7 @@ func anonymize(s string, r *rand.Rand, spec *conf.F_spec) string {
 		return email.Email(s).Transform(r, spec)
 	case "ip":
 		return ipaddr.Ipaddr(s).Transform(r, spec)
-	case "pno":
+	case "pno4":
 		return pno.Transform(s, r, spec)
 	default:
 		panic("unknow class")

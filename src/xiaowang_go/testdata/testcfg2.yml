@@ -16,4 +16,4 @@ fields:
   ip:
     transform: ip
   owner_person4:
-    transform: pno
+    transform: pno4
