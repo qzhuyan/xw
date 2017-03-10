@@ -11,6 +11,7 @@ import (
 	"xiaowang_go/conf"
 	"xiaowang_go/datetime"
 	"xiaowang_go/email"
+	"xiaowang_go/ip"
 	"xiaowang_go/numeric"
 	"xiaowang_go/text"
 	"xiaowang_go/xwrand"
@@ -66,11 +67,12 @@ func Run(conffile, srcfile, destfile string) {
 }
 
 func anonymize(s string, r *rand.Rand, spec *conf.F_spec) string {
-	defer func() {
+	defer func() string {
 		if r := recover(); r != nil {
 			fmt.Printf("Recovered in anonymize class: %s str: %s\n", spec.Class, r)
-			return ""
 		}
+		return ""
+
 	}()
 	if s == "" {
 		return ""
@@ -86,7 +88,8 @@ func anonymize(s string, r *rand.Rand, spec *conf.F_spec) string {
 		return datetime.Datetime(s).Transform(r, spec)
 	case "email":
 		return email.Email(s).Transform(r, spec)
-
+	case "ip":
+		return ipaddr.Ipaddr(s).Transform(r, spec)
 	default:
 		panic("unknow class")
 	}
