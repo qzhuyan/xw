@@ -15,7 +15,7 @@ type F_spec struct {
 type CSV_conf struct {
 	Version    int
 	Fields     map[string]F_spec
-	Skipheader bool
+	Skipheader bool //if we shoud ignore the csv header
 	Seed       int64
 	Header     []string
 }

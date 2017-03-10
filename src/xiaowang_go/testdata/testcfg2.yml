@@ -13,3 +13,5 @@ fields:
     transform: text
   phone:
     transform: numeric
+  ip:
+    transform: ip

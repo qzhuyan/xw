@@ -8,9 +8,9 @@ import (
 	"xiaowang_go/xwrand"
 )
 
-const test_dt datetime.Datetime = "20160101 08:07:33"
-const start_dt datetime.Datetime = "20160101 00:07:33"
-const end_dt datetime.Datetime = "20160102 08:07:33"
+const test_dt datetime.Datetime = "20160101 08:07:33.000"
+const start_dt datetime.Datetime = "20160101 00:07:33.000"
+const end_dt datetime.Datetime = "20160102 08:07:33.000"
 
 var testConf conf.F_spec = conf.F_spec{Rangefrom: string(start_dt), Rangeto: string(end_dt)}
 
