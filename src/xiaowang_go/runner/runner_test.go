@@ -16,6 +16,13 @@ func TestRun(t *testing.T) {
 	compare_csv_file(from, to, t)
 }
 
+func TestRunMeaningful(t *testing.T) {
+	from := "../testdata/test2.csv"
+	to := "../testdata/result2.csv"
+	runner.Run("../testdata/testcfg2.yml", from, to)
+	compare_csv_file(from, to, t)
+}
+
 func compare_csv_file(file1, file2 string, t *testing.T) {
 	//now check file identical
 	src, err := os.Open(file1)
