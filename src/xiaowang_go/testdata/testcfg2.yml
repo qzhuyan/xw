@@ -1,0 +1,15 @@
+version: 1
+skipheader: no
+header: [id, name, email, addr1, phone]
+seed: 1
+fields:
+  id:
+    transform: numeric
+  name:
+    transform: text
+  email:
+    transform: email
+  addr1:
+    transform: text
+  phone:
+    transform: numeric
