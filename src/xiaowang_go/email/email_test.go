@@ -8,7 +8,7 @@ import (
 	"xiaowang_go/xwrand"
 )
 
-const test_email email.Email = "123@abc.com"
+const test_email email.Email = "alice@abc.com"
 
 func TestEmailTransform(t *testing.T) {
 	res := test_email.Transform(xwrand.NewRandSeed(1), new(conf.F_spec))
@@ -18,5 +18,10 @@ func TestEmailTransform(t *testing.T) {
 	}
 	if words[1] != "abc.com" {
 		t.Error("mail server should be abc.com")
+	}
+
+	res2 := test_email.Transform(xwrand.NewRandSeed(1), new(conf.F_spec))
+	if res2 != res {
+		t.Error("random not stable", res2, res)
 	}
 }

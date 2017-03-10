@@ -3,6 +3,7 @@ package runner
 import (
 	//"bufio"
 	"encoding/csv"
+	//	"fmt"
 	"io"
 	"log"
 	"math/rand"
@@ -42,7 +43,6 @@ func Run(conffile, srcfile, destfile string) {
 		c.Header = data
 		w.Write(data)
 	}
-
 	for {
 		record, err := r.Read()
 		if err == io.EOF {

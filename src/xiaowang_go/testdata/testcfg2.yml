@@ -1,6 +1,6 @@
 version: 1
 skipheader: no
-header: [id, name, email, addr1, phone]
+header: [id,name,email,addr1,phone]
 seed: 1
 fields:
   id:

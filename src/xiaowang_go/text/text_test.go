@@ -18,4 +18,26 @@ func TestTextTransform(t *testing.T) {
 	if len(words[1]) != 3 {
 		t.Error("len should not be changed")
 	}
+
+	res2 := test_string.Transform(xwrand.NewRandSeed(1), new(conf.F_spec))
+
+	if res2 != res {
+		t.Error("should have same result with same seed")
+	}
+
+}
+
+//Benchmark which is faster?
+
+func BenchmarkTransformWithNewSeed(b *testing.B) {
+	for i := 0; i < 10000; i++ {
+		test_string.Transform(xwrand.NewRandSeed(1), new(conf.F_spec))
+	}
+}
+
+func BenchmarkTransformWithRandSrc(b *testing.B) {
+	r := xwrand.NewRandSeed(1)
+	for i := 0; i < 10000; i++ {
+		test_string.Transform(r, new(conf.F_spec))
+	}
 }
