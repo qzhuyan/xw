@@ -13,6 +13,7 @@ import (
 	"xiaowang_go/email"
 	"xiaowang_go/ip"
 	"xiaowang_go/numeric"
+	"xiaowang_go/pno"
 	"xiaowang_go/text"
 	"xiaowang_go/xwrand"
 )
@@ -72,7 +73,6 @@ func anonymize(s string, r *rand.Rand, spec *conf.F_spec) string {
 			fmt.Printf("Recovered in anonymize class: %s str: %s\n", spec.Class, r)
 		}
 		return ""
-
 	}()
 	if s == "" {
 		return ""
@@ -90,6 +90,8 @@ func anonymize(s string, r *rand.Rand, spec *conf.F_spec) string {
 		return email.Email(s).Transform(r, spec)
 	case "ip":
 		return ipaddr.Ipaddr(s).Transform(r, spec)
+	case "pno":
+		return pno.Transform(s, r, spec)
 	default:
 		panic("unknow class")
 	}

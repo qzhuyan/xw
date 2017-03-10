@@ -1,2 +1,2 @@
-id,name,email,addr1,phone,ip
-1,alice,alice@gmail.com,some addr in lidingo,0712345678,13.135.44.123
+id,name,email,addr1,phone,ip,owner_person4
+1,alice,alice@gmail.com,some addr in lidingo,0712345678,13.135.44.123,SE19890807-3875

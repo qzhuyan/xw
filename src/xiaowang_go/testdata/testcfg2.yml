@@ -1,6 +1,6 @@
 version: 1
 skipheader: no
-header: [id,name,email,addr1,phone]
+header: [id,name,email,addr1,phone,owner_person4]
 seed: 1
 fields:
   id:
@@ -15,3 +15,5 @@ fields:
     transform: numeric
   ip:
     transform: ip
+  owner_person4:
+    transform: pno
