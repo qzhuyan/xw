@@ -3,7 +3,7 @@ package runner
 import (
 	//"bufio"
 	"encoding/csv"
-	//	"fmt"
+	"fmt"
 	"io"
 	"log"
 	"math/rand"
@@ -21,6 +21,7 @@ func Run(conffile, srcfile, destfile string) {
 	c := conf.ParseConf(conffile)
 	//iter input file
 	src, err := os.Open(srcfile)
+
 	if nil != err {
 		panic(err)
 	}
@@ -65,6 +66,12 @@ func Run(conffile, srcfile, destfile string) {
 }
 
 func anonymize(s string, r *rand.Rand, spec *conf.F_spec) string {
+	defer func() {
+		if r := recover(); r != nil {
+			fmt.Printf("Recovered in anonymize class: %s str: %s\n", spec.Class, r)
+			return ""
+		}
+	}()
 	if s == "" {
 		return ""
 	}
