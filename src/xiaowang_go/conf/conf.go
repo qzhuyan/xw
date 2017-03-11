@@ -8,8 +8,13 @@ import (
 )
 
 type F_spec struct {
-	Class                          string `yaml:"transform"`
-	Name, Conf, Rangefrom, Rangeto string
+	Class string `yaml:"transform"`
+	Name,
+	Conf,
+	FormatIn,
+	FormatOut,
+	Rangefrom,
+	Rangeto string
 }
 
 type CSV_conf struct {

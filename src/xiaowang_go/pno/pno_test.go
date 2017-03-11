@@ -9,7 +9,7 @@ import (
 
 func TestPnoTransform(t *testing.T) {
 	res := pno.Transform("SE19890807-3875", xwrand.NewRandSeed(1), new(conf.F_spec))
-	if res != "SE6551919-1410" {
+	if res != "SE19890831-1410" {
 		t.Error("transform failed", res)
 	}
 }

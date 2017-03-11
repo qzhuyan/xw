@@ -12,7 +12,11 @@ const test_dt string = "2016-07-10 11:00:20.000"
 const start_dt string = "2016-01-01 00:07:33.000"
 const end_dt string = "2016-01-02 08:07:33.000"
 
-var testConf conf.F_spec = conf.F_spec{Rangefrom: start_dt, Rangeto: end_dt}
+var testConf conf.F_spec = conf.F_spec{
+	Rangefrom: start_dt,
+	Rangeto:   end_dt,
+	FormatIn:  datetime.Defaultfmt,
+}
 
 func TestDatetimeTransform(t *testing.T) {
 	t1 := datetime.Transform(test_dt, xwrand.NewRandSeed(1), &testConf)
@@ -43,6 +47,14 @@ func TestDatetimeRangeOK_late(t *testing.T) {
 		t.Error("range should not be ok")
 	}
 	return
+}
+
+func TestParseFmt(t *testing.T) {
+	d := datetime.Parsefmt("20120103", "20060102")
+	if "20120103" != d.Format("20060102") {
+		t.Error("Format error")
+	}
+
 }
 
 //todo: test invalid datetime
