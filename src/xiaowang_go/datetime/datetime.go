@@ -6,21 +6,26 @@ import "math/rand"
 import "xiaowang_go/xwrand"
 import "xiaowang_go/conf"
 
-type Datetime string
-
-func (d Datetime) Transform(r *rand.Rand, c *conf.F_spec) string {
-	from := Datetime(c.Rangefrom)
-	to := Datetime(c.Rangeto)
-	d.Rangeok(from, to)
-	unixfrom := from.Parse().Unix()
-	unixto := to.Parse().Unix()
-	newtime := xwrand.RandInRange(r, unixfrom, unixto)
-	return time.Unix(newtime+unixfrom, 0).Format("2006-01-02 15:04:05.000")
+func Transform(d string, r *rand.Rand, c *conf.F_spec) string {
+	from := c.Rangefrom
+	to := c.Rangeto
+	if from != "" && to != "" {
+		Rangeok(d, from, to)
+		unixfrom := Parse(from).Unix()
+		unixto := Parse(to).Unix()
+		newtime := xwrand.RandInRange(r, unixfrom, unixto)
+		return time.Unix(newtime+unixfrom, 0).Format("2006-01-02 15:04:05.000")
+	} else {
+		unixfrom := Parse(d).Unix()
+		unixto := Parse(d).AddDate(0, 0, 30).Unix()
+		newtime := xwrand.RandInRange(r, unixfrom, unixto)
+		return time.Unix(newtime+unixfrom, 0).Format("2006-01-02 15:04:05.000")
+	}
 }
 
 //todo make time format flexable
-func (d Datetime) Parse() time.Time {
-	t, error := time.Parse("2006-01-02 15:04:05.000", string(d))
+func Parse(d string) time.Time {
+	t, error := time.Parse("2006-01-02 15:04:05.000", d)
 	if error != nil {
 		fmt.Println("Parse datetime string failed", d, error)
 		panic("invalid Datetime")
@@ -29,6 +34,6 @@ func (d Datetime) Parse() time.Time {
 }
 
 //panic if rang check failed
-func (d Datetime) Rangeok(from, to Datetime) bool {
+func Rangeok(d, from, to string) bool {
 	return from < d && d < to
 }

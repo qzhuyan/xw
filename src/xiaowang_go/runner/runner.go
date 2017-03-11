@@ -74,6 +74,7 @@ func anonymize(s string, r *rand.Rand, spec *conf.F_spec) string {
 		}
 		return ""
 	}()
+
 	if s == "" {
 		return ""
 	}
@@ -85,7 +86,7 @@ func anonymize(s string, r *rand.Rand, spec *conf.F_spec) string {
 	case "text":
 		return text.Text(s).Transform(r, spec)
 	case "datetime":
-		return datetime.Datetime(s).Transform(r, spec)
+		return datetime.Transform(s, r, spec)
 	case "email":
 		return email.Email(s).Transform(r, spec)
 	case "ip":

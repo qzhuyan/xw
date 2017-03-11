@@ -1,6 +1,7 @@
 package xwrand
 
 import (
+	//"fmt"
 	"math/rand"
 )
 
