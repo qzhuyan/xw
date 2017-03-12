@@ -13,7 +13,7 @@ func TestRun(t *testing.T) {
 	from := "../testdata/test.csv"
 	to := "../testdata/result.csv"
 	os.Remove(to)
-	runner.Run("../testdata/testcfg.yml", from, to)
+	runner.Run("../testdata/testcfg.yml", from, to, 0)
 	csv_file_eq(from, to, false, t)
 }
 
@@ -21,7 +21,7 @@ func TestRunMeaningful(t *testing.T) {
 	from := "../testdata/test2.csv"
 	to := "../testdata/result2.csv"
 	os.Remove(to)
-	runner.Run("../testdata/testcfg2.yml", from, to)
+	runner.Run("../testdata/testcfg2.yml", from, to, 0)
 	csv_file_not_eq(from, to, true, t)
 }
 

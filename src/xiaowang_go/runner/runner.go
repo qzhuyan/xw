@@ -18,7 +18,7 @@ import (
 	"xiaowang_go/xwrand"
 )
 
-func Run(conffile, srcfile, destfile string) {
+func Run(conffile, srcfile, destfile string, seed int64) {
 	//read config
 	c := conf.ParseConf(conffile)
 	//iter input file
@@ -36,7 +36,11 @@ func Run(conffile, srcfile, destfile string) {
 	r := csv.NewReader(src)
 	w := csv.NewWriter(dest)
 
-	seed := xwrand.NewRandSeed(c.Seed)
+	if seed != 0 {
+		c.Seed = seed
+	}
+
+	rsrc := xwrand.NewRandSeed(c.Seed)
 
 	if !c.Skipheader {
 		data, err := r.Read()
@@ -46,6 +50,7 @@ func Run(conffile, srcfile, destfile string) {
 		c.Header = data
 		w.Write(data)
 	}
+
 	for {
 		record, err := r.Read()
 		if err == io.EOF {
@@ -58,7 +63,7 @@ func Run(conffile, srcfile, destfile string) {
 
 		for pos, name := range c.Header {
 			spec := c.Fields[name]
-			record[pos] = anonymize(record[pos], seed, &spec)
+			record[pos] = anonymize(record[pos], rsrc, &spec)
 		}
 		w.Write(record)
 	}
