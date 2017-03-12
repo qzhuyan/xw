@@ -12,6 +12,10 @@ func Transform(d string, r *rand.Rand, c *conf.F_spec) string {
 	from := c.Rangefrom
 	to := c.Rangeto
 
+	if c.FormatIn == "" {
+		c.FormatIn = Defaultfmt
+	}
+
 	if from == "" && to == "" {
 		unixfrom := Parsefmt(d, c.FormatIn).Unix()
 		newtime := xwrand.RandInRange(r, unixfrom, unixfrom+10000000)
