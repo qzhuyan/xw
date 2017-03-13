@@ -18,17 +18,24 @@ import (
 	"xiaowang_go/xwrand"
 )
 
-func Run(conffile, srcfile, destfile string, seed int64) {
+type Runner_conf struct {
+	Conffile string
+	Srcfile  string
+	Destfile string
+	Seed     int64
+}
+
+func Run(runconf Runner_conf) {
 	//read config
-	c := conf.ParseConf(conffile)
+	c := conf.ParseConf(runconf.Conffile)
 	//iter input file
-	src, err := os.Open(srcfile)
+	src, err := os.Open(runconf.Srcfile)
 
 	if nil != err {
 		panic(err)
 	}
 
-	dest, err := os.Create(destfile)
+	dest, err := os.Create(runconf.Destfile)
 	if nil != err {
 		panic(err)
 	}
@@ -36,8 +43,8 @@ func Run(conffile, srcfile, destfile string, seed int64) {
 	r := csv.NewReader(src)
 	w := csv.NewWriter(dest)
 
-	if seed != 0 {
-		c.Seed = seed
+	if runconf.Seed != 0 {
+		c.Seed = runconf.Seed
 	}
 
 	rsrc := xwrand.NewRandSeed(c.Seed)

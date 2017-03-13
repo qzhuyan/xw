@@ -10,19 +10,28 @@ import (
 )
 
 func TestRun(t *testing.T) {
-	from := "../testdata/test.csv"
-	to := "../testdata/result.csv"
-	os.Remove(to)
-	runner.Run("../testdata/testcfg.yml", from, to, 0)
-	csv_file_eq(from, to, false, t)
+	rconf := runner.Runner_conf{
+		Srcfile:  "../testdata/test.csv",
+		Destfile: "../testdata/result.csv",
+		Conffile: "../testdata/testcfg.yml",
+		Seed:     1,
+	}
+	os.Remove(rconf.Destfile)
+	runner.Run(rconf)
+	csv_file_eq(rconf.Srcfile, rconf.Destfile, false, t)
 }
 
 func TestRunMeaningful(t *testing.T) {
-	from := "../testdata/test2.csv"
-	to := "../testdata/result2.csv"
-	os.Remove(to)
-	runner.Run("../testdata/testcfg2.yml", from, to, 0)
-	csv_file_not_eq(from, to, true, t)
+	rconf := runner.Runner_conf{
+		Srcfile:  "../testdata/test2.csv",
+		Destfile: "../testdata/result2.csv",
+		Conffile: "../testdata/testcfg2.yml",
+		Seed:     1,
+	}
+
+	os.Remove(rconf.Destfile)
+	runner.Run(rconf)
+	csv_file_not_eq(rconf.Srcfile, rconf.Destfile, true, t)
 }
 
 func csv_file_not_eq(file1, file2 string, hasheader bool, t *testing.T) {

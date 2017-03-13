@@ -12,6 +12,12 @@ func main() {
 	destfileP := flag.String("d", "", "dest file")
 	conffileP := flag.String("c", "", "config file")
 	seedP := flag.Int64("s", 1, "override seed")
+	rconf := runner.Runner_conf{
+		Srcfile:  *srcfileP,
+		Destfile: *destfileP,
+		Conffile: *conffileP,
+		Seed:     *seedP,
+	}
 	flag.Parse()
 
 	fmt.Printf("xiaowang gogo! \nconf:%s\nsrc:%s\ndest:%s\n", *conffileP, *srcfileP, *destfileP)
@@ -26,7 +32,7 @@ func main() {
 		panic_if_no_exists(f)
 	}
 
-	runner.Run(*conffileP, *srcfileP, *destfileP, *seedP)
+	runner.Run(rconf)
 }
 
 func panic_if_no_exists(f string) bool {
